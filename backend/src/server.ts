@@ -24,9 +24,12 @@ app.get("/health", (req, res) => {
   });
 });
 
-// Exporta para a Vercel (serverless)
+// Exporta o app para a Vercel (serverless)
 export default app;
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+// Roda localmente apenas fora da Vercel
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+  });
+}
